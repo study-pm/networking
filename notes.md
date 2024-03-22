@@ -44,6 +44,7 @@
   - [1.10 Практика и контрольная работа модуля](#110-практика-и-контрольная-работа-модуля)
     - [Что я изучил в этом модуле?](#что-я-изучил-в-этом-модуле)
     - [Новые термины и команды](#новые-термины-и-команды)
+- [2. Базовая конфигурация коммутатора и оконечного устройства](#2-базовая-конфигурация-коммутатора-и-оконечного-устройства)
 - [Практические работы 1 - 4](#практические-работы-1---4)
   - [Практическая работа 1: Packet Tracer. Навигация по IOS](#практическая-работа-1-packet-tracer-навигация-по-ios)
     - [Задачи](#задачи)
@@ -536,6 +537,25 @@ Data center<br>Дата-центр | A building, a dedicated space within a buil
 Smart home technology<br>Технология "умный дом" | Is used to describe internet-connected home systems that automate the things homeowners will use every day. A smart home is a residence that uses internet-connected devices to enable the remote monitoring and management of appliances and systems, such as lighting and heating. Smart home technology — also often referred to as home automation or domotics from the Latin word *domus*, meaning home — provides homeowners security, comfort, convenience and energy efficiency by letting them control smart devices, often using a smart home app on their smartphone or another networked device. A part of the internet of things (IoT), smart home systems and devices often operate together, sharing consumer usage data among themselves and automating actions based on the homeowners' preferences.
 Powerline networking / Powerline communication (PLC)<br>Связь через ЛЭП | The carrying of data on a conductor that is also used simultaneously for AC electric power transmission or electric power distribution to consumers. The line that does so is known as a power-line carrier.<br>Термин, описывающий несколько разных систем для использования линий электропередачи (ЛЭП) для передачи голосовой информации или данных. Сеть может передавать голос и данные, накладывая аналоговый сигнал поверх стандартного переменного тока частотой 50 Гц или 60 Гц.
 Wireless Internet Service Provider (WISP)<br>Провайдер беспроводного интернет-доступа | An internet service provider (ISP) that allows subscribers to connect to the internet at designated hot spots or access points using a wireless connection such as Wi-Fi.
+
+## 2. Базовая конфигурация коммутатора и оконечного устройства
+65f8184ed048d37352721422
+
+**Заголовок модуля**: Базовая конфигурация коммутатора и оконечного устройства
+
+**Цели модуля**: Выполнить первоначальную настройку, в том числе паролей, IP-адресации и параметров шлюза по умолчанию, сетевого коммутатора и оконечных устройств.
+
+
+| Заголовок темы | Цель темы |
+-- | --
+**Доступ к Cisco IOS** | Объяснить, как получить доступ к устройству под управлением Cisco IOS для настройки.
+**Навигация по IOS** | Объяснить, как настраивать сетевые устройства в Cisco IOS.
+**Структура команд** | Описать структуры команд в программном обеспечении Cisco IOS.
+**Базовая настройка устройств** | Выполнить настройку устройств под управлением Cisco IOS с помощью интерфейса командной строки.
+**Сохранение конфигураций** | Сохранить текущую конфигурацию с помощью команд IOS.
+**Порты и адреса** | Объяснить принципы обмена данными между устройствами в сетевых средах.
+**Настройка IP-адресации** | Выполнить настройку IP-адреса хост-устройства.
+**Проверка подключения** | Выполнить проверку подключения между двумя оконечными устройствами.
 
 ---
 
