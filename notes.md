@@ -42,8 +42,8 @@
     - [Решения обеспечения безопасности](#решения-обеспечения-безопасности)
   - [1.9 Специалист в сфере ИТ](#19-специалист-в-сфере-ит)
   - [1.10 Практика и контрольная работа модуля](#110-практика-и-контрольная-работа-модуля)
-  - [Что я изучил в этом модуле?](#что-я-изучил-в-этом-модуле)
-  - [Новые термины и команды](#новые-термины-и-команды)
+    - [Что я изучил в этом модуле?](#что-я-изучил-в-этом-модуле)
+    - [Новые термины и команды](#новые-термины-и-команды)
 - [Практические работы 1 - 4](#практические-работы-1---4)
   - [Практическая работа 1: Packet Tracer. Навигация по IOS](#практическая-работа-1-packet-tracer-навигация-по-ios)
     - [Задачи](#задачи)
@@ -478,7 +478,7 @@ Cisco Webex Teams — это многофункциональный инстру
 ### 1.10 Практика и контрольная работа модуля
 65fc4d95d048d373527214c3
 
-### Что я изучил в этом модуле?
+#### Что я изучил в этом модуле?
 - Благодаря использованию сетей мы связываемся, как никогда раньше.
 - Все компьютеры, подключенные к сети и непосредственно участвующие в сетевом взаимодействии, считаются узлами или хостами.
 - Для представления различных устройств и каналов, из которых состоит сеть, на схемах сетей часто используются символы.
@@ -493,7 +493,7 @@ Cisco Webex Teams — это многофункциональный инстру
 - Более крупные сети и корпоративные сети используют антивирусные, антишпионские программы и фильтрацию брандмауэров, но они также имеют другие требования безопасности: выделенные системы брандмауэра, списки управления доступом (ACL), системы предотвращения вторжений (IPS) и виртуальные частные сети (VPN)
 - Сертификация Cisco Certified Network Associate (CCNA) демонстрирует ваши знания фундаментальных технологий.
 
-### Новые термины и команды
+#### Новые термины и команды
 
 | Term | Description |
 -- | --
@@ -523,7 +523,7 @@ Fault tolerant network<br>Устойчивая сеть | A system that is able 
 Packet-switched network (PSN)<br>Сеть с коммутацией пакетов | A type of communication network that groups and sends data in the form of small packets, thereby enabling data/network packet sending between a source and a destination node over a shared data path (network channel) between multiple users and/or applications.
 Circuit-switched network<br>Сеть с коммутацией каналов | A type of network where the communications between end devices (nodes) must be set up before they can communicate. Once set up, the “circuit” is dedicated to the two nodes it connects for the duration of that connection. An example of a circuit-switched network is an analog telephone network. A circuit-switched network is connection-oriented, while a packet-switched network offers an advanced digital upgrade.<br>Вид телекоммуникационной сети, в которой между двумя узлами сети должно быть установлено соединение, прежде чем они начнут обмен информацией. Данное соединение на протяжении всего сеанса обмена информацией может использоваться только указанными двумя узлами.
 Scalable network<br>Масштабируемая сеть | The type of a network that is capable to handle increased demands and grow its capacity as the need arises.
-Quality of Service (Qos)<br>Качество обслуживания | The use of mechanisms or technologies that work on a network to control traffic and ensure the performance of critical applications with limited network capacity. It enables organizations to adjust their overall network traffic by prioritizing specific high-performance applications.<br>Технология указания приоритетов обслуживания разным типам трафика.
+Quality of Service (QoS)<br>Качество обслуживания | The use of mechanisms or technologies that work on a network to control traffic and ensure the performance of critical applications with limited network capacity. It enables organizations to adjust their overall network traffic by prioritizing specific high-performance applications.<br>Технология указания приоритетов обслуживания разным типам трафика.
 Network bandwidth<br>Пропускная способность сети | A measure of the data transfer rate or capacity of a given network. It's a crucial network measurement for understanding the speed and quality of a network. Network bandwidth is commonly measured in bits per second (bps).
 Bring Your Own Device (BYOD) | The set of policies in a business that allows employees to use their own devices – phone, laptop, tablet or whatever – to access business applications and data, rather than forcing employees to use company-provided devices for that purpose.<br>IT-политика, которая позволяет и даже поощряет использование собственных устройств для выполнения рабочих задач.
 Collaboration<br>Совместная работа | The process of two or more people, entities or organizations working together to complete a task or achieve a goal.
