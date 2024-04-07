@@ -87,6 +87,9 @@
     - [Автоматическая настройка IP-адресов оконечных устройств](#автоматическая-настройка-ip-адресов-оконечных-устройств)
     - [Виртуальный интерфейс коммутатора](#виртуальный-интерфейс-коммутатора)
   - [2.8 Проверка подключения](#28-проверка-подключения)
+  - [2.9 Практика и контрольная работа модуля](#29-практика-и-контрольная-работа-модуля)
+    - [Что я изучил в этом модуле?](#что-я-изучил-в-этом-модуле-1)
+    - [Новые термины и команды](#новые-термины-и-команды-1)
 - [Практические работы 1 - 4](#практические-работы-1---4)
   - [Практическая работа 1: Packet Tracer. Навигация по IOS](#практическая-работа-1-packet-tracer-навигация-по-ios)
     - [Задачи](#задачи)
@@ -1206,7 +1209,61 @@ Switch(config-if)# no shutdown
 ### 2.8 Проверка подключения
 66126ac7d048d373527216cc
 
----
+### 2.9 Практика и контрольная работа модуля
+66128d49d048d373527216d0
+
+#### Что я изучил в этом модуле?
+
+- Всем оконечным устройствам и сетевым устройствам требуется операционная система (ОС).
+- В качестве меры безопасности программное обеспечение Cisco IOS отделяет доступ к средствам управления в следующих двух режимах команд: пользовательском режиме EXEC и привилегированном режиме EXEC.
+- Перед тем как перейти в другие специализированные режимы конфигурации, нужно войти в режим глобальной конфигурации. Из режима глобальной конфигурации пользователь может перейти в различные дополнительные режимы конфигурации.
+- Каждая команда IOS имеет определенный формат или синтаксис и выполняется только в соответствующем режиме.
+- Основные конфигурации устройства — имя хоста, пароль, шифровать пароли и баннер.
+- Конфигурация устройства хранится в двух системных файлах: *startup-config* и *running-config*.
+- Чтобы устройства обнаружили друг друга и установили сквозное подключение по сети Интернет, используются IP-адреса. IP-адреса необходимо настроить для всех оконечных устройств в сети.
+
+#### Новые термины и команды
+
+| Term | Description |
+-- | --
+**Operating System** (**OS**) | System software that manages computer hardware and software resources, and provides common services for computer programs.
+**Command Line Interface** (**CLI**) | A text-based interface where you can input commands that interact with a computer's operating system.
+**Graphical User Interface** (**GUI**) | A form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation.
+**Shell** |  A computer program that exposes an operating system's services to a human user or other programs. In general, operating system shells use either a command-line interface or graphical user interface, depending on a computer's role and particular operation.
+**Kernel** | A computer program at the core of a computer's operating system and generally has complete control over everything in the system. The kernel is also responsible for preventing and mitigating conflicts between different processes.
+**Hardware** | The physical parts of a computer, such as the central processing unit, random access memory, motherboard, computer data storage, graphics card, sound card, and computer case. It includes external devices such as a monitor, mouse, keyboard, and speakers.
+**Console** (**Con**) | A computer terminal where a user may input commands and view output such as the results of inputted commands or status messages from the computer. The console is often connected to a remote computer or computer system that is controlled from the console.
+**Secure Shell** (**SSH**) | A cryptographic network protocol for operating network services securely over an unsecured network. Its most notable applications are remote login and command-line execution.
+**Telnet** | A client/server application protocol that provides access to virtual terminals of remote systems on local area networks or the Internet. It is a protocol for bidirectional 8-bit communications. Its main goal was to connect terminal devices and terminal-oriented processes.
+**Terminal emulation programs** | Computer programs that emulates a video terminal within some other display architecture.
+**User EXEC mode** | The default mode for the device; it supports the lowest level of user permissions. In this mode, you can execute basic commands such as ping and traceroute, but only a subset of clear, show, and debug commands can be entered in this mode.
+**Privileged EXEC mode** | The mode that allows you to access all router commands, supports all clear, show, and debug commands. In addition, you can enter some configuration commands that do not make changes to the system configuration. It is used mainly to configure the router, enable interfaces, setup security, define dialup interfaces etc.
+**Line configuration mode** |  Is used to manage the terminal line characteristics for output formatting. Line configuration mode commands allow you to configure the virtual terminal line settings.
+**Interface configuration mode** | Allows users to make changes to the configuration of specific interfaces on the router.
+**enable** | Enable command lets enter privileged mode that allows you to configure your Cisco devices.
+**configure terminal** | The configure terminal command enters Global mode. In this mode, you can create system-wide resources for various system services, configure global behaviors, and enter specialized configuration modes.
+**exit** | This command closes your current connection if you are in user EXEC mode or privileged EXEC mode. To exit any configuration mode or close an active terminal session and terminate the EXEC, use the exit command at the system prompt.
+**end** | Exit takes you back one mode. For example, say you are in Line Configuration mode, exit will take you back to Global Configuration mode. End takes you back to priviliged/enable mode from any deeper mode. If you typed end in line configuration mode, it would drop you back to Priviliged mode.
+**Argument** |  Is some value
+**Keyword** | A word that is reserved by a program because that word has a special meaning, typically a commands or parameters.
+**Command syntax** | Rules in which the command must be run in order for a piece of software to understand it.
+**ping** |  A computer network administration software utility used to test the reachability of a host on an Internet Protocol network. It is available for virtually all operating systems that have networking capability, including most embedded network administration software. Ping is a powerful TCP/IP command designed to help track and resolve connectivity issues between two or more networked devices.
+**traceroute** | A tool to trace the path of an IP packet as it traverses routers locally or globally. It is primarily used for diagnostic and troubleshooting network connection. In computing, traceroute and tracert are computer network diagnostic commands for displaying possible routes and measuring transit delays of packets across an Internet Protocol network
+**Help command ”?”** | A utility that contains information on the use of commands and descriptions. The help command provides information on built-in commands.
+**Hot keys** | A hotkey is a key or a combination of keys on a computer keyboard that, when pressed at one time, performs a task (such as starting an application) more quickly than using a mouse or other input device. Hotkeys are sometimes called shortcut keys (or keyboard shortcuts).
+**Hostname** | A label that is assigned to a device connected to a computer network and that is used to identify the device in various forms of electronic communication, such as the World Wide Web. Hostnames may be simple names consisting of a single word or phrase, or they may be structured.
+**enable secret** | A command that specifies an additional layer of security over the enable password command. Enable secret configures a new privilege level for users and associate commands with that privilege level. The “enable secret” command sets the privileged exec password (it's the mode you're trying to go into when you type in enable). It will enables a password and password encryption that based on the md5 hashing algorithm.
+**VTY line** | Virtual teletype (VTY) is a command line interface that gives users access to a device's control plane, most often in network devices like routers and switches. By using it, administrators can configure, manage, and monitor the device remotely. VTY lines are logical interfaces of a device.
+**show running-config** | Command that displays the current running configuration.
+**banner motd** | This command specifies the message that is displayed as the Message Of The Day, the very first message displayed to an incoming connection. "Message Of The Day (MOTD)" banner is a customized message displayed on a terminal when a user is trying to connect to CISCO IOS devices.
+**startup-config** | The configuration your devices run on when they reboot or power up.
+**running-config** | The current version of the configuration file the device runs on.
+**reload** | This command causes the router to reload the IOS operating system and reboot. You can specify a time for the reload to occur by using the in and at options.
+**erase startup-config** | This command completely erases the startup configuration file from NVRAM. The command is typically used when you want to completely reset a device to its factory default settings.
+**DHCP** | The Dynamic Host Configuration Protocol is a network management protocol used on Internet Protocol networks for automatically assigning IP addresses and other communication parameters to devices connected to the network using a client–server architecture.
+**Switch virtual interface** (**SVI**) | A logical interface configured on a layer 3 switch that connects a VLAN to the routing engine of the switch. SVI allows traffic to be routed between VLANs by providing a default gateway for each VLAN. SVI also provides layer 3 IP connectivity to the switch and supports bridging and routing protocols.<br>SVI is different from a physical interface on a router, which creates a separate network segment and broadcast domain for each interface. With SVI, multiple VLANs can share the same physical interface on the switch, but each VLAN has its own logical interface and broadcast domain.
+**ipconfig** | A command line utility that is used to display and manage the IP address assigned to the machine. A console application program of some computer operating systems that displays all current TCP/IP network configuration values and refreshes Dynamic Host Configuration Protocol and Domain Name System settings.
+**show ip int brief** | The `show ip interface brief` command can be used to view a summary of the router interfaces. This command displays the IP address, interface status, and additional information.
 
 ## Практические работы 1 - 4
 65f81865d048d37352721423
