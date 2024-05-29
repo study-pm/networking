@@ -200,6 +200,18 @@
     - [Часть 3. Сохранение файла текущей конфигурации](#часть-3-сохранение-файла-текущей-конфигурации)
       - [Шаг 1. Сохраните файл конфигурации в NVRAM.](#шаг-1-сохраните-файл-конфигурации-в-nvram)
       - [Шаг 2. Дополнительный бонус: сохраните файл загрузочной конфигурации во флеш-память.](#шаг-2-дополнительный-бонус-сохраните-файл-загрузочной-конфигурации-во-флеш-память)
+  - [Практическая работа 8: Cisco Packet Tracer. Устранение неполадок, связанных со шлюзом по умолчанию](#практическая-работа-8-cisco-packet-tracer-устранение-неполадок-связанных-со-шлюзом-по-умолчанию)
+    - [Таблица адресации](#таблица-адресации-2)
+    - [Задачи](#задачи-4)
+    - [Общие сведения](#общие-сведения-4)
+    - [Часть 1. Проверка сетевой документации и устранение проблем](#часть-1-проверка-сетевой-документации-и-устранение-проблем)
+      - [Шаг 1. Проверьте сетевую документацию и выявите все проблемы.](#шаг-1-проверьте-сетевую-документацию-и-выявите-все-проблемы)
+      - [Документация по тестированию и проверке](#документация-по-тестированию-и-проверке)
+      - [Шаг 2. Определите оптимальное решение для устранения проблемы.](#шаг-2-определите-оптимальное-решение-для-устранения-проблемы)
+    - [Часть 2. Внедрение, проверка и документирование решений](#часть-2-внедрение-проверка-и-документирование-решений)
+      - [Шаг 1. Внедрите решения для устранения проблем подключения.](#шаг-1-внедрите-решения-для-устранения-проблем-подключения)
+      - [Шаг 2. Убедитесь, что проблема решена.](#шаг-2-убедитесь-что-проблема-решена)
+      - [Шаг 3. Убедитесь, что все проблемы устранены.](#шаг-3-убедитесь-что-все-проблемы-устранены)
 
 ## 1. Современные сетевые технологии
 65c7aa27d048d37352720f92
@@ -3015,3 +3027,1134 @@ File  Length   Name/status
 ```
 
 </details>
+
+### Практическая работа 8: Cisco Packet Tracer. Устранение неполадок, связанных со шлюзом по умолчанию
+6655ce75d048d37352721ad9
+
+https://studfile.net/preview/17167229/page:7/#19
+
+#### Таблица адресации
+
+Устройство | интерфейс | IP-адрес | Subnet Mask (Маска подсети) | Основной шлюз
+-- | -- | -- | -- | --
+R1 | G0/0 | 192.168.10.1 | 255.255.255.0 | —
+|  | G0/1 | 192.168.11.1 | 255.255.255.0 | —
+S1 | VLAN 1 | 192.168.10.2 | 255.255.255.0 | *192.168.10.1*
+S2 | VLAN 1 | 192.168.11.2 | 255.255.255.0 | *192.168.11.1*
+PC1 | NIC | 192.168.10.10 | 255.255.255.0 | *192.168.10.1*
+PC2 | NIC | 192.168.10.11 | 255.255.255.0 | *192.168.10.1*
+PC3 | NIC | 192.168.11.10 | 255.255.255.0 | *192.168.11.1*
+PC4 | NIC | 192.168.11.11 | 255.255.255.0 | *192.168.11.1*
+
+#### Задачи
+
+- **Часть 1**. Проверка сетевой документации и устранение проблем
+
+- **Часть 2**. Внедрение, проверка и документирование решений
+
+#### Общие сведения
+
+Чтобы устройство могло обмениваться данными в пределах нескольких сетей, ему должен быть присвоен IP-адрес, маска подсети и шлюз по умолчанию. Шлюз по умолчанию используется в том случае, когда узлу необходимо отправить пакет устройству, находящемуся в другой сети. Адресом шлюза по умолчанию обычно является адрес интерфейса маршрутизатора, подключенного к локальной сети, к которой подключен узел. В этом упражнении вы завершите документирование сети. После этого вы проверите сетевую документацию, протестировав сквозное подключения и устранив возникшие неполадки. Метод устранения неполадок, который вы будете использовать, состоит из следующих действий.
+
+1) Проверьте сетевую документацию и выполните тестовые проверки, чтобы выявить проблемы.
+
+2) Определите оптимальное решение для устранения конкретной проблемы.
+
+3) Примените выбранное решение.
+
+4) Проведите тестирование, чтобы убедиться, что проблема устранена.
+
+5) Запишите выбранное решение.
+
+В ходе курса CCNA вы столкнетесь с разными описаниями методов устранения неполадок, а также с другими способами тестирования и документирования проблем и решений. Это сделано намеренно. Для устранения неполадок не существует единого стандарта или шаблона. В каждой организации есть свои уникальные процессы и стандарты документирования (даже в случае, если они нормативно не утверждены). Однако все эффективные технологии устранения неполадок обычно включают в себя вышеуказанные действия.
+
+**Примечание**. Если вы хорошо знакомы с конфигурацией шлюза по умолчанию, это упражнение может показаться вам сложнее, чем это нужно. Вы наверняка сможете быстрее определить и устранить возможные проблемы своими силами, чем путем выполнения этих процедур. Однако по мере изучения курса масштаб сетей и проблем, с которыми вы столкнетесь, будет становиться все сложнее. В таких ситуациях единственным эффективным способом обнаружения и устранения неполадок является использование методического подхода, аналогичного тому, который используется в данном упражнении.
+
+#### Часть 1. Проверка сетевой документации и устранение проблем
+https://studfile.net/preview/17167229/page:8/
+
+В части 1 этого упражнения вы составите документацию и выполните проверки подключения, чтобы обнаружить проблемы. Кроме того, вы определите соответствующее решение для его последующего внедрения в части 2.
+
+##### Шаг 1. Проверьте сетевую документацию и выявите все проблемы.
+
+А. Перед началом надлежащей проверки сети вам необходимо иметь полную документацию по ней. Обратите внимание, в **таблице адресации** отсутствуют некоторые данные. Заполните **таблицу адресации**, указав отсутствующие данные шлюза по умолчанию для коммутаторов и компьютеров.
+
+Б. Проверьте подключение к устройствами, принадлежащим к одной сети. Выявляя и устраняя проблемы с локальным доступом, проверить работу удаленного подключения можно быстрее, если определить работу локального подключения.
+
+План проверки может быть таким же простым, как список тестовых проверок связи. Используйте указанные ниже тесты для проверки локального подключения и поиска всех проблем с доступом. Первая проблема уже была задокументирована, но вы должны внедрить и проверить это решение в части 2.
+
+##### Документация по тестированию и проверке
+
+Проверка | Успешно? | EIGRP* | Решение | Проверено
+-- | -- | -- | -- | --
+PC1 — PC2 | Нет | IP-адрес на PC1 | Изменить IP-адрес PC1 | +
+PC1 — S1 | Да | | | +
+PC1 — R1 | Да | | | +
+PC2 — PC1 | Да | | | +
+PC2 — S1 | Да | | | +
+PC2 — R1 | Да | | | +
+S1 — PC1 | Да | | | +
+S1 — PC2 | Да | | | +
+S1 — R1 | Да | | | +
+PC3 — PC4 | Да | | | +
+PC3 — S2 | Нет | IP-aдрес на S2 | Настроить параметры Vlan1 на S2 | +
+PC3 — R1 | Да | | | +
+PC4 — PC3 | Да | | | +
+PC4 — S1 | Да | | | +
+PC4 — R1 | Да | | | +
+S2 — PC3 | Да | | | +
+S2 — PC4 | Да | | | +
+S2 — R1 | Да | | | +
+
+> \* Enhanced Interior Gateway Routing Protocol (EIGRP) is a network protocol that enables routers to exchange information more efficiently than earlier network protocols, such as Interior Gateway Routing Protocol (IGRP) or Border Gateway Protocol (BGP). Enhanced Interior Gateway Routing Protocol is an advanced distance-vector routing protocol that is used on a computer network for automating routing decisions and configuration. The protocol was designed by Cisco Systems as a proprietary protocol, available only on Cisco routers.
+
+<details>
+<summary><b>Процесс проверки</b></summary>
+
+Например, связь между компьютерами PC1 и PC2. *Desktop* > *Command Prompt*.
+
+Отправляем эхо запрос. Он оказался неуспешным.
+```
+C:\>ping  192.168.10.11
+
+Pinging 192.168.10.11 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 192.168.10.11:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+```
+
+Проверяем настройку PC1. IP не РС1 не совпал с правильной адресацией, он должен быть 196.168.10.10, маска и шлюз верные.
+
+```
+C:\>ipconfig
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..:
+   Link-local IPv6 Address.........: FE80::20D:BDFF:FE84:B6D1
+   IPv6 Address....................: ::
+   IPv4 Address....................: 192.168.11.10
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     192.168.10.1
+
+Bluetooth Connection:
+
+   Connection-specific DNS Suffix..:
+   Link-local IPv6 Address.........: ::
+   IPv6 Address....................: ::
+   IPv4 Address....................: 0.0.0.0
+   Subnet Mask.....................: 0.0.0.0
+   Default Gateway.................: ::
+                                     0.0.0.0
+
+C:\>
+```
+
+Исправляем IP в IP Configuration:
+
+![PC1 IP Configuration](./img/htmlconvd-XjhfFl_html_91f550f149d94235.png)
+
+После проверки правильности конфигураций PC2 и S1 отправляем эхо запрос с РС1 на РС2 заново. Он успешный. Проблему исправили.
+```
+Pinging 192.168.10.11 with 32 bytes of data:
+
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=128
+
+Ping statistics for 192.168.10.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+```
+
+Проверяем остальные подключения с PC1 (PC1 — S1, PC1 — R1) в подсети:
+```
+C:\>ping 192.168.10.2
+
+Pinging 192.168.10.2 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=255
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=255
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.10.2:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>ping 192.168.10.1
+
+Pinging 192.168.10.1 with 32 bytes of data:
+
+Reply from 192.168.10.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.10.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.10.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.10.1: bytes=32 time=3ms TTL=255
+
+Ping statistics for 192.168.10.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 3ms, Average = 0ms
+
+C:\>
+
+```
+
+Проверяем все подключения с PC2 (PC2 — PC1, PC2 — S1, PC2 — R1) в подсети:
+```
+C:\>ping 192.168.10.10
+
+Pinging 192.168.10.10 with 32 bytes of data:
+
+Reply from 192.168.10.10: bytes=32 time=4ms TTL=128
+Reply from 192.168.10.10: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.10: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.10: bytes=32 time<1ms TTL=128
+
+Ping statistics for 192.168.10.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 4ms, Average = 1ms
+
+C:\>ping 192.168.10.2
+
+Pinging 192.168.10.2 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.10.2: bytes=32 time=1ms TTL=255
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=255
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.10.2:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>ping 192.168.10.1
+
+Pinging 192.168.10.1 with 32 bytes of data:
+
+Reply from 192.168.10.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.10.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.10.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.10.1: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.10.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>
+```
+
+Проверяем все подключения с S1 (S1 — PC1, S1 — PC2, S1 — R1) в подсети (через CLI):
+```
+S1>ping 192.168.10.10
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.10.10, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+S1>ping 192.168.10.11
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.10.11, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/1/2 ms
+
+S1>ping 192.168.10.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.10.1, timeout is 2 seconds:
+.!!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 0/0/0 ms
+
+S1>
+```
+
+Проверяем все подключения во второй подсети. Проверяем все подключения с PC3 (PC3 — PC4, PC3 — S2, PC3 — R1)
+```
+C:\>ping 192.168.11.11
+
+Pinging 192.168.11.11 with 32 bytes of data:
+
+Reply from 192.168.11.11: bytes=32 time<1ms TTL=128
+Reply from 192.168.11.11: bytes=32 time=1ms TTL=128
+Reply from 192.168.11.11: bytes=32 time<1ms TTL=128
+Reply from 192.168.11.11: bytes=32 time<1ms TTL=128
+
+Ping statistics for 192.168.11.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>ping 192.168.11.2
+
+Pinging 192.168.11.2 with 32 bytes of data:
+
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 192.168.11.2:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+
+C:\>ipconfig
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..:
+   Link-local IPv6 Address.........: FE80::290:2BFF:FE65:7DCC
+   IPv6 Address....................: ::
+   IPv4 Address....................: 192.168.11.10
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     192.168.11.1
+
+Bluetooth Connection:
+
+   Connection-specific DNS Suffix..:
+   Link-local IPv6 Address.........: ::
+   IPv6 Address....................: ::
+   IPv4 Address....................: 0.0.0.0
+   Subnet Mask.....................: 0.0.0.0
+   Default Gateway.................: ::
+                                     0.0.0.0
+
+C:\>ping 192.168.11.1
+
+Pinging 192.168.11.1 with 32 bytes of data:
+
+Reply from 192.168.11.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.11.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.11.1: bytes=32 time=1ms TTL=255
+Reply from 192.168.11.1: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.11.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+```
+
+Проверка показала наличие проблем с подключением к узлу S2, причём конфигурация PC3 настроена верно, значит, проблему, вероятно, следует искать на S2.
+
+Проверяем сетевые интерфейсы на устройстве S2 (через CLI коммутатора):
+```
+S2>show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol
+FastEthernet0/1        unassigned      YES manual up                    up
+FastEthernet0/2        unassigned      YES manual up                    up
+FastEthernet0/3        unassigned      YES manual up                    up
+FastEthernet0/4        unassigned      YES manual down                  down
+FastEthernet0/5        unassigned      YES manual down                  down
+FastEthernet0/6        unassigned      YES manual down                  down
+FastEthernet0/7        unassigned      YES manual down                  down
+FastEthernet0/8        unassigned      YES manual down                  down
+FastEthernet0/9        unassigned      YES manual down                  down
+FastEthernet0/10       unassigned      YES manual down                  down
+FastEthernet0/11       unassigned      YES manual down                  down
+FastEthernet0/12       unassigned      YES manual down                  down
+FastEthernet0/13       unassigned      YES manual down                  down
+FastEthernet0/14       unassigned      YES manual down                  down
+FastEthernet0/15       unassigned      YES manual down                  down
+FastEthernet0/16       unassigned      YES manual down                  down
+FastEthernet0/17       unassigned      YES manual down                  down
+FastEthernet0/18       unassigned      YES manual down                  down
+FastEthernet0/19       unassigned      YES manual down                  down
+FastEthernet0/20       unassigned      YES manual down                  down
+FastEthernet0/21       unassigned      YES manual down                  down
+FastEthernet0/22       unassigned      YES manual down                  down
+FastEthernet0/23       unassigned      YES manual down                  down
+FastEthernet0/24       unassigned      YES manual down                  down
+GigabitEthernet0/1     unassigned      YES manual down                  down
+GigabitEthernet0/2     unassigned      YES manual down                  down
+Vlan1                  unassigned      YES manual up                    up
+S2>
+```
+
+Видно, что виртуальный интерфейс коммутатора S2 не настроен. Для исправления ошибки следует настроить параметры Vlan1 в соответствии с таблицей адресации.
+
+```
+S2>en
+S2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S2(config)#interface vlan1
+S2(config-if)#ip address 192.168.11.2 255.255.255.0
+S2(config-if)#no shutdown
+S2(config-if)#exit
+S2(config)#exit
+S2#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S2>show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol
+FastEthernet0/1        unassigned      YES manual up                    up
+FastEthernet0/2        unassigned      YES manual up                    up
+FastEthernet0/3        unassigned      YES manual up                    up
+FastEthernet0/4        unassigned      YES manual down                  down
+FastEthernet0/5        unassigned      YES manual down                  down
+FastEthernet0/6        unassigned      YES manual down                  down
+FastEthernet0/7        unassigned      YES manual down                  down
+FastEthernet0/8        unassigned      YES manual down                  down
+FastEthernet0/9        unassigned      YES manual down                  down
+FastEthernet0/10       unassigned      YES manual down                  down
+FastEthernet0/11       unassigned      YES manual down                  down
+FastEthernet0/12       unassigned      YES manual down                  down
+FastEthernet0/13       unassigned      YES manual down                  down
+FastEthernet0/14       unassigned      YES manual down                  down
+FastEthernet0/15       unassigned      YES manual down                  down
+FastEthernet0/16       unassigned      YES manual down                  down
+FastEthernet0/17       unassigned      YES manual down                  down
+FastEthernet0/18       unassigned      YES manual down                  down
+FastEthernet0/19       unassigned      YES manual down                  down
+FastEthernet0/20       unassigned      YES manual down                  down
+FastEthernet0/21       unassigned      YES manual down                  down
+FastEthernet0/22       unassigned      YES manual down                  down
+FastEthernet0/23       unassigned      YES manual down                  down
+FastEthernet0/24       unassigned      YES manual down                  down
+GigabitEthernet0/1     unassigned      YES manual down                  down
+GigabitEthernet0/2     unassigned      YES manual down                  down
+Vlan1                  192.168.11.2    YES manual up                    up
+S2>
+```
+
+Снова проверяем подключение PC3 — S2:
+
+```
+C:\>ping 192.168.11.2
+
+Pinging 192.168.11.2 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.11.2: bytes=32 time=1ms TTL=255
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=255
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.11.2:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+```
+
+Проверяем все подключения с PC4 (PC4 — PC3, PC4 — S2, PC4 — R1) в подсети.
+```
+Cisco Packet Tracer PC Command Line 1.0
+C:\>ping 192.168.11.10
+
+Pinging 192.168.11.10 with 32 bytes of data:
+
+Reply from 192.168.11.10: bytes=32 time<1ms TTL=128
+Reply from 192.168.11.10: bytes=32 time=1ms TTL=128
+Reply from 192.168.11.10: bytes=32 time<1ms TTL=128
+Reply from 192.168.11.10: bytes=32 time<1ms TTL=128
+
+Ping statistics for 192.168.11.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>ping 192.168.11.2
+
+Pinging 192.168.11.2 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=255
+Reply from 192.168.11.2: bytes=32 time=6ms TTL=255
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.11.2:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 6ms, Average = 2ms
+
+C:\>ping 192.168.11.1
+
+Pinging 192.168.11.1 with 32 bytes of data:
+
+Reply from 192.168.11.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.11.1: bytes=32 time=4ms TTL=255
+Reply from 192.168.11.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.11.1: bytes=32 time=1ms TTL=255
+
+Ping statistics for 192.168.11.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 4ms, Average = 1ms
+
+C:\>
+```
+
+Проверяем все подключения с S2 (S2 — PC3, S2 — PC4, S2 — R1) в подсети.
+```
+S2>ping 192.168.11.10
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.10, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+S2>ping 192.168.11.11
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.11, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+S2>ping 192.168.11.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.1, timeout is 2 seconds:
+.!!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 0/0/2 ms
+
+S2>
+```
+
+</details>
+
+
+В. Проверьте подключение к удаленным устройствам (например, связь между компьютерами PC1 и PC4) и задокументируйте все проблемы. Зачастую такой процесс называется *сквозным подключением*. Это означает, что все устройства в сети имеют все возможности подключения, разрешаемые сетевой политикой.
+
+> **Примечание**. Проверку подключения к удаленным устройствам возможно еще нельзя выполнить, потому что сначала необходимо решить проблемы локальной сети. После решения этих проблем вернитесь к данному шагу и проверьте подключение между сетями.
+
+Проверка | Успешно? | EIGRP* | Решение | Проверено
+-- | -- | -- | -- | --
+R1 — S1 | Да | | | +
+R1 — S2 | Да | | | +
+R1 — PC1 | Да | | | +
+R1 — PC2 | Да | | | +
+R1 — PC3 | Да | | | +
+R1 — PC4 | Да | | | +
+S1 — S2 | Нет | Шлюз по умолчанию на S1 | Настроить default gateway на S1 | +
+S1 — PC3 | Нет | Шлюз по умолчанию на S1 | Настроить default gateway на S1 | +
+S1 — PC4 | Нет | Шлюз по умолчанию на PC4 | Настроить default gateway на PC4 | +
+S2 — S1 | Да | | | +
+S2 — PC1 | Да | | | +
+S2 — PC2 | Да | | | +
+PC1 — S2 | Да | | | +
+PC1 — PC3 | Да | | | +
+PC1 — PC4 | Да | | | +
+PC2 — S2 | Да | | | +
+PC2 — PC4 | Да | | | +
+PC2 — PC3 | Да | | | +
+PC3 — S1 | Да | | | +
+PC3 — PC1 | Да | | | +
+PC3 — PC2 | Да | | | +
+PC4 — S1 | Да | | | +
+PC4 — PC1 | Да | | | +
+PC4 — PC2 | Да | | | +
+
+<details>
+<summary><b>Процесс проверки</b></summary>
+
+Проверяем все подключения с R1 (R1 — S1, R1 — S2, R1 — PC1, R1 — PC2, R1 — PC3, R1 — PC4) (через CLI):
+```
+R1>ping 192.168.10.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.10.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+R1>ping 192.168.11.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/1/3 ms
+
+R1>ping 192.168.10.10
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.10.10, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+R1>ping 192.168.10.11
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.10.11, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+R1>ping 192.168.11.10
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.10, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/1/2 ms
+
+R1>ping 192.168.11.11
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.11, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/1 ms
+
+```
+
+Проверяем сквозные подключения с S1 (S1 — S2, S1 — PC3, S1 — PC4) (через CLI):
+```
+S1>ping 192.168.11.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.2, timeout is 2 seconds:
+.....
+Success rate is 0 percent (0/5)
+
+S1>ping 192.168.11.10
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.10, timeout is 2 seconds:
+.....
+Success rate is 0 percent (0/5)
+
+S1>ping 192.168.11.11
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.11, timeout is 2 seconds:
+.....
+Success rate is 0 percent (0/5)
+
+```
+
+Как видно, ни одно сквознее подключение с S1 не работает. Проверим настройки S1:
+```
+S1>en
+S1#show run
+Building configuration...
+
+Current configuration : 1090 bytes
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname S1
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 192.168.10.2 255.255.255.0
+!
+!
+!
+!
+line con 0
+!
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+!
+!
+end
+
+
+S1#
+```
+
+Видно, что хотя виртуальный интерфейс маршрутизатора R1 настроен (IP-адрес и маска подсети верные), но шлюз по умолчанию не установлен. Для исправления ошибки следует установить адрес шлюза по умолчанию в соответствии с таблицей адресации.
+```
+S1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S1(config)#ip default-gateway 192.168.10.1
+S1(config)#exit
+S1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S1#show run
+Building configuration...
+
+Current configuration : 1124 bytes
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname S1
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 192.168.10.2 255.255.255.0
+!
+ip default-gateway 192.168.10.1
+!
+!
+!
+!
+line con 0
+!
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+!
+!
+!
+end
+
+
+S1#
+```
+
+Повторно проверяем сквозные подключения с S1 (S1 — S2, S1 — PC3, S1 — PC4) (через CLI):
+```
+S1>ping 192.168.11.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/3/16 ms
+
+S1>ping 192.168.11.10
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.10, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+S1>ping 192.168.11.11
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.11, timeout is 2 seconds:
+.....
+Success rate is 0 percent (0/5)
+
+S1>
+```
+
+Теперь работают все сквозные подключения с S1 кроме PC4. Проверим настройки PC4:
+
+![Invalid default gateway](./img/pc4-invalid-default-gateway.png)
+
+Как видно, указан неверный адрес шлюза по умолчанию. Исправим его на верный (192.168.11.1) и повторно проверим подключение S1 — PC4:
+```
+S1>ping 192.168.11.11
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.11.11, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+S1>
+```
+
+Теперь все сквозные подключения с S1 работают.
+
+Проверяем сквозные подключения с S2 (S2 — S1, S2 — PC1, S2 — PC2) (через CLI):
+```
+S2>ping 192.168.10.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.10.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/2/8 ms
+
+S2>ping 192.168.10.10
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.10.10, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+S2>ping 192.168.10.11
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.10.11, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+S2>
+```
+
+Проверяем сквозные подключения с PC1 (PC1 — S2, PC1 — PC3, PC1 — PC4) (через консоль — Command Prompt):
+```
+C:\>ping 192.168.11.2
+
+Pinging 192.168.11.2 with 32 bytes of data:
+
+Reply from 192.168.11.2: bytes=32 time=2ms TTL=254
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=254
+Reply from 192.168.11.2: bytes=32 time=1ms TTL=254
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=254
+
+Ping statistics for 192.168.11.2:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 2ms, Average = 0ms
+
+C:\>ping 192.168.11.10
+
+Pinging 192.168.11.10 with 32 bytes of data:
+
+Reply from 192.168.11.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.11.10: bytes=32 time=1ms TTL=127
+Reply from 192.168.11.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.11.10: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.11.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>ping 192.168.11.11
+
+Pinging 192.168.11.11 with 32 bytes of data:
+
+Reply from 192.168.11.11: bytes=32 time=11ms TTL=127
+Reply from 192.168.11.11: bytes=32 time=2ms TTL=127
+Reply from 192.168.11.11: bytes=32 time=4ms TTL=127
+Reply from 192.168.11.11: bytes=32 time=2ms TTL=127
+
+Ping statistics for 192.168.11.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 2ms, Maximum = 11ms, Average = 4ms
+
+C:\>
+```
+
+Проверяем сквозные подключения с PC2 (PC2 — S2, PC2 — PC3, PC2 — PC4):
+```
+C:\>ping 192.168.11.2
+
+Pinging 192.168.11.2 with 32 bytes of data:
+
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=254
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=254
+Reply from 192.168.11.2: bytes=32 time=1ms TTL=254
+Reply from 192.168.11.2: bytes=32 time=4ms TTL=254
+
+Ping statistics for 192.168.11.2:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 4ms, Average = 1ms
+
+C:\>ping 192.168.11.10
+
+Pinging 192.168.11.10 with 32 bytes of data:
+
+Reply from 192.168.11.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.11.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.11.10: bytes=32 time=9ms TTL=127
+Reply from 192.168.11.10: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.11.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 9ms, Average = 2ms
+
+C:\>ping 192.168.11.11
+
+Pinging 192.168.11.11 with 32 bytes of data:
+
+Reply from 192.168.11.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.11.11: bytes=32 time=1ms TTL=127
+Reply from 192.168.11.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.11.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.11.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+```
+
+Проверяем сквозные подключения с PC3 (PC3 — S1, PC3 — PC1, PC3 — PC2):
+```
+C:\>ping 192.168.10.2
+
+Pinging 192.168.10.2 with 32 bytes of data:
+
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=254
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=254
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=254
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=254
+
+Ping statistics for 192.168.10.2:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>ping 192.168.10.10
+
+Pinging 192.168.10.10 with 32 bytes of data:
+
+Reply from 192.168.10.10: bytes=32 time=5ms TTL=127
+Reply from 192.168.10.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.10.10: bytes=32 time=1ms TTL=127
+Reply from 192.168.10.10: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.10.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 5ms, Average = 1ms
+
+C:\>ping 192.168.10.11
+
+Pinging 192.168.10.11 with 32 bytes of data:
+
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.10.11: bytes=32 time=7ms TTL=127
+
+Ping statistics for 192.168.10.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 7ms, Average = 1ms
+
+C:\>
+```
+
+Проверяем сквозные подключения с PC4 (PC4 — S1, PC4 — PC1, PC4 — PC2):
+```
+C:\>ping 192.168.11.2
+
+Pinging 192.168.11.2 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=255
+Reply from 192.168.11.2: bytes=32 time=6ms TTL=255
+Reply from 192.168.11.2: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.11.2:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 6ms, Average = 2ms
+
+C:\>ping 192.168.11.1
+
+Pinging 192.168.11.1 with 32 bytes of data:
+
+Reply from 192.168.11.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.11.1: bytes=32 time=4ms TTL=255
+Reply from 192.168.11.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.11.1: bytes=32 time=1ms TTL=255
+
+Ping statistics for 192.168.11.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 4ms, Average = 1ms
+
+C:\>
+C:\>ping 192.168.10.2
+
+Pinging 192.168.10.2 with 32 bytes of data:
+
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=254
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=254
+Reply from 192.168.10.2: bytes=32 time=1ms TTL=254
+Reply from 192.168.10.2: bytes=32 time<1ms TTL=254
+
+Ping statistics for 192.168.10.2:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>ping 192.168.10.10
+
+Pinging 192.168.10.10 with 32 bytes of data:
+
+Reply from 192.168.10.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.10.10: bytes=32 time=5ms TTL=127
+Reply from 192.168.10.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.10.10: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.10.10:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 5ms, Average = 1ms
+
+C:\>ping 192.168.10.11
+
+Pinging 192.168.10.11 with 32 bytes of data:
+
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.10.11: bytes=32 time=1ms TTL=127
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=127
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.10.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>
+```
+
+Теперь все сквозные подключения работают, все проблемы сети устранены.
+
+</details>
+
+##### Шаг 2. Определите оптимальное решение для устранения проблемы.
+
+А. Для поиска причины проблемы используйте полученные знания о принципах работы сети, а также свои навыки по настройке устройств. Например, коммутатор S1 не является причиной проблемы связи между компьютерами PC1 и PC2. Световой индикатор сети горит зеленым, а конфигурация коммутатора S1 не предусматривает передачу трафика между компьютерами PC1 и PC2. Таким образом, проблема должна быть на стороне компьютера PC1 или PC2 или обоих устройствах.
+
+Б. Проверьте параметры адресации устройства, чтобы убедиться в том, что они соответствуют сетевой документации. Например, команда **`ipconfig`** показывает, что компьютер PC1 имеет неправильный IP-адрес.
+
+В. Предложите решение, которое, по вашему мнению, может решить проблему, и задокументируйте его. Например, изменить IP-адрес компьютера PC1 согласно документации.
+
+> **Примечание**. Зачастую решений может быть несколько. Однако оптимальным методом устранения неполадки является внедрение только одного решения. В более сложном случае внедрение нескольких решений может привести к возникновению дополнительных проблем.
+
+#### Часть 2. Внедрение, проверка и документирование решений
+
+В части 2 этого упражнения вы внедрите решения, которые были определены в части 1. Затем вы проверите работу этих решений. Для завершения поиска всех проблем вам может понадобиться вернуться к части 1.
+
+##### Шаг 1. Внедрите решения для устранения проблем подключения.
+
+См. данные документации в части 1. Выберите первую проблему и внедрите свое предложенное решение. Например, исправьте IP-адрес на компьютере PC1.
+
+##### Шаг 2. Убедитесь, что проблема решена.
+
+А. Убедитесь в том, что ваше решение устранило проблему. Для этого выполните тот же тест, в ходе которого была выявлена проблема. Например, можно ли теперь отправить эхо-запрос с компьютера PC1 на компьютер PC2?
+
+Б. Если проблема решена, укажите это в своей документации. Например, в приведенной выше таблице достаточно будет поставить галочку в столбце «Проверено».
+
+##### Шаг 3. Убедитесь, что все проблемы устранены.
+
+А. Если у вас остались проблемы, для которых решения еще не были внедрены, вернитесь к части 2, шагу 1.
+
+Б. Если все текущие проблемы устранены, решены ли проблемы с удаленными подключениями (например, можно ли отправить эхо-запрос с компьютера PC1 на компьютер PC4)? Если ответ отрицательный, вернитесь к части 1, шаг 1В, чтобы проверить удаленное подключение.
