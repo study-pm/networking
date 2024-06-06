@@ -227,6 +227,20 @@
         - [Шаг 2. Настройте два коммутатора локальной сети клиента.](#шаг-2-настройте-два-коммутатора-локальной-сети-клиента)
         - [Шаг 3: Настройте интерфейс PC .](#шаг-3-настройте-интерфейс-pc-)
         - [Часть 3. Проверка сети и устранение неполадок](#часть-3-проверка-сети-и-устранение-неполадок)
+  - [Практическая работа 11: Packet Tracer. Сценарий разделения на подсети](#практическая-работа-11-packet-tracer-сценарий-разделения-на-подсети)
+    - [Таблица адресации](#таблица-адресации-4)
+    - [Задачи](#задачи-5)
+    - [Сценарий](#сценарий-1)
+    - [Инструкции](#инструкции-1)
+      - [Часть 1: разработка схемы IP-адресации.](#часть-1-разработка-схемы-ip-адресации)
+        - [Шаг 1: Разделите сеть 192.168.100.0/24 на соответствующее количество подсетей.](#шаг-1-разделите-сеть-192168100024-на-соответствующее-количество-подсетей)
+        - [Шаг 2.Назначьте подсети для сети, показанной в топологии.](#шаг-2назначьте-подсети-для-сети-показанной-в-топологии)
+        - [Шаг 3.Задокументируйте схему адресации.](#шаг-3задокументируйте-схему-адресации)
+      - [Часть 2. Назначение сетевым устройствам IP-адресов и проверка подключения](#часть-2-назначение-сетевым-устройствам-ip-адресов-и-проверка-подключения)
+        - [Шаг 1: Настройте интерфейсы VLAN.](#шаг-1-настройте-интерфейсы-vlan)
+        - [Шаг 2: Настройте IP-адресацию на S3.](#шаг-2-настройте-ip-адресацию-на-s3)
+        - [Шаг 3: Настройка PC4.](#шаг-3-настройка-pc4)
+        - [Шаг 4: Проверьте подключение.](#шаг-4-проверьте-подключение)
 
 ## 1. Современные сетевые технологии
 65c7aa27d048d37352720f92
@@ -4711,3 +4725,743 @@ C:\>
 </details>
 
 Если вы ответили отрицательно на любой из заданных выше вопросов, вернитесь назад и проверьте введенные IP-адреса и маски подсети, а также убедитесь в том, что шлюзы по умолчанию PC-A и PC-B правильно настроены.
+
+### Практическая работа 11: Packet Tracer. Сценарий разделения на подсети
+665a3697d048d37352721b40
+
+#### Таблица адресации
+
+Устройство | Интерфейс | IP-адрес | Маска подсети | Шлюз по умолчанию
+-- | -- | -- | -- | --
+R1 | G0/0 | *192.168.100.1* | *255.255.255.224* | —
+R1 | G0/1 | *192.168.100.33* | *255.255.255.224* | —
+R1 | S0/0/0 | *192.168.100.129* | *255.255.255.224* | —
+R2 | G0/0 | *192.168.100.65* | *255.255.255.224* | —
+R2 | G0/1 | *192.168.100.97* | *255.255.255.224* | —
+R2 | S0/0/0 | *192.168.100.158* | *255.255.255.224* | —
+S1 | VLAN 1 | *192.168.100.2* | *255.255.255.224* | *192.168.100.1*
+S2 | VLAN 1 | *192.168.100.34* | *255.255.255.224* | *192.168.100.33*
+S3 | VLAN 1 | *192.168.100.66* | *255.255.255.224* | *192.168.100.65*
+S4 | VLAN 1 | *192.168.100.98* | *255.255.255.224* | *192.168.100.97*
+PC1 | NIC | *192.168.100.30* | *255.255.255.224* | *192.168.100.1*
+PC2 | NIC | *192.168.100.62* | *255.255.255.224* | *192.168.100.33*
+PC3 | NIC | *192.168.100.94* | *255.255.255.224* | *192.168.100.65*
+PC4 | NIC | *192.168.100.126* | *255.255.255.224* | *192.168.100.97*
+
+#### Задачи
+- **Часть 1**. Разработка схемы IP-адресации
+
+- **Часть 2**. Назначение сетевым устройствам IP-адресов и проверка подключения
+
+#### Сценарий
+В этом упражнении вам предоставляется сетевой адрес 192.168.100.0/24 для подсети, и вы должны составить схему IP-адресации сети, изображенной в Packet Tracer. Для каждой локальной сети (LAN) в сети требуется по крайней мере, 25 адресов для оконечных устройств, коммутатора и маршрутизатора. Для соединения между маршрутизаторами R1 и R2 потребуется по одному IP-адресу на каждом конце канала.
+
+#### Инструкции
+
+##### Часть 1: разработка схемы IP-адресации.
+
+###### Шаг 1: Разделите сеть 192.168.100.0/24 на соответствующее количество подсетей.
+
+Вопросы:
+a. Сколько потребуется подсетей в соответствии с имеющейся топологией?
+
+<details>
+<summary><b>Ответ</b></summary>
+
+Требуется 5 подсетей: R1-S1-PC1, R1-S2-PC2, R2-S3-PC3, R2-S4-PC4, R1-R2.
+
+</details>
+
+б. Сколько бит необходимо заимствовать для поддержки нескольких подсетей в таблице топологии?
+
+<details>
+<summary><b>Ответ</b></summary>
+
+Не менее 3 бит: $2^2 < 5 < 2^3 \implies 4 < 5 < 8$.
+
+</details>
+
+в. Сколько в результате этого создается подсетей?
+
+<details>
+<summary><b>Ответ</b></summary>
+
+2<sup>3</sup> = 8.
+
+</details>
+
+г. Сколько при этом в каждой подсети будет доступно узлов?
+
+<details>
+<summary><b>Ответ</b></summary>
+
+Исходная маска подсети в соответствии с префиксом /24:
+
+1111 1111.1111 1111.1111 1111.0000 0000
+
+Эквивалент десятичной маски подсети с точками: 255.255.255.**0**.
+
+Новая маска подсети (заимствуем 3 бита из хостовой части исходной сети /24) /27:
+
+1111 1111.1111 1111.1111 1111.**111***00 0000*
+
+Эквивалент десятичной маски подсети с точками: 255.255.255.**224** (2<sup>7</sup> + 2<sup>6</sup> + 2<sup>5</sup> = 128 + 64 + 32).
+
+В данном случае количество единиц в последнем октете определяет число доступнрых подсетей, а нулей — доступных узлов в каждой подсети:
+
+- количество подсетей: 2<sup><b>3</b></sup> = 8;
+- общее количество IP-адресов в подсети: 2<sup><i>5</i></sup> = 32;
+- количество доступных IP-адресов в сети для назначения хостам: 32 - 2 = 30.
+
+</details>
+
+> **Примечание**. Если ваш ответ — менее 25 узлов, значит, вы позаимствовали слишком много бит.
+
+д. Рассчитайте двоичное значение для первых пяти подсетей. Первые две подсети были созданы для вас.
+
+Подсеть | Сетевой адрес | Бит 7 | Бит 6 | Бит 5 | Бит 4 | Бит 3 | Бит 2 | Бит 1 | Бит 0
+-- | -- | -- | -- | -- | -- | -- | -- | -- | --
+0 | 192.168.100.**0**   | **0** | **0** | **0** | 0 | 0 | 0 | 0 | 0
+1 | 192.168.100.**32** (2<sup>**5**</sup> = Бит 5) | **0** | **0** | **1** | 0 | 0 | 0 | 0 | 0
+2 | 192.168.100.**64** (2<sup>**6**</sup> = Бит 6) | **0** | **1** | **0** | *0* | *0* | *0* | *0* | *0*
+3 | 192.168.100.**96**  (2<sup>**6**</sup> + 2<sup>**5**</sup> = Бит 6 + Бит 5) | **0** | **1** | **1** | *0* | *0* | *0* | *0* | *0*
+4 | 192.168.100.**128**  (2<sup>**7**</sup> = Бит 7) | **1** | **0** | **0** | *0* | *0* | *0* | *0* | *0*
+
+е. Рассчитайте двоичное и десятичное значение новой маски подсети.
+
+<table>
+<thead>
+<tr>
+  <th>Первый октет</th><th>Второй октет</th><th>Третий октет</th><th>Маска бит 7</th><th>Маска бит 6</th><th>Маска бит 5</th><th>Маска бит 4</th><th>Маска бит 3</th><th>Маска бит 2</th><th>Маска бит 1</th><th>Маска бит 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>11111111</td><td>11111111</td><td>11111111</td><td><b>1</b></td><td><b>1</b></td><td><b>1</b></td><td><i>0</i></td><td><i>0</i></td><td><i>0</i></td><td><i>0</i></td><td><i>0</i></td>
+</tr>
+</tbody>
+<thead>
+<tr>
+  <th>Первый десятичный октет</th><th>Второй десятичный октет</th><th>Третий десятичный октет</th><th colspan=8>Четвертый десятичный октет</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>255.</td><td>255.</td><td>255.</td><td colspan=8>224 = 2<sup><b>7</b></sup> + 2<sup><b>6</b></sup> + 2<sup><b>5</b></sup> = 128 + 64 + 32</td>
+</tr>
+</tbody>
+</table>
+
+ж. Заполните **Таблицу подсетей**, перечислив десятичные значения всех доступных подсетей, первый и последний используемый адрес хоста и широковещательный адрес. Повторяйте эти действия до тех пор, пока все адреса не будут внесены в список.
+
+> **Примечание**. Возможно, потребуется заполнить не все строки.
+
+**Таблица подсетей**
+
+Номер подсети | Адрес подсети | Первый используемый адрес узла | Последний используемый адрес узла | Широковещательный адрес
+-- | -- | -- | -- | --
+0 | 192.168.100.0   | 192.168.100.1   | 192.168.100.30  | 192.168.100.31
+1 | 192.168.100.32  | 192.168.100.33  | 192.168.100.62  | 192.168.100.63
+2 | 192.168.100.64  | 192.168.100.65  | 192.168.100.94  | 192.168.100.95
+3 | 192.168.100.96  | 192.168.100.97  | 192.168.100.126 | 192.168.100.127
+4 | 192.168.100.128 | 192.168.100.129 | 192.168.100.158 | 192.168.100.159
+
+###### Шаг 2.Назначьте подсети для сети, показанной в топологии.
+a. Назначьте подсеть 0 локальной сети, подключённой к интерфейсу GigabitEthernet 0/0 маршрутизатора R1.
+
+б. Назначьте подсеть 1 локальной сети, подключённой к интерфейсу GigabitEthernet 0/1 маршрутизатора R1.
+
+в. Назначьте подсеть 2 локальной сети, подключённой к интерфейсу GigabitEthernet 0/0 маршрутизатора R2.
+
+г. Назначьте подсеть 3 локальной сети, подключённой к интерфейсу GigabitEthernet 0/1 маршрутизатора R2.
+
+д. Назначьте подсеть 4 каналу WAN между маршрутизаторами R1 и R2.
+
+###### Шаг 3.Задокументируйте схему адресации.
+Заполните **таблицу адресации**, используя следующие рекомендации.
+
+a. Назначьте первые используемые IP-адреса на каждую подсеть маршрутизатора R1 для двух каналов локальной сети (LAN) и одного канала WAN.
+
+б. Назначьте первые используемые IP-адреса на каждую подсеть маршрутизатора R2 для каналов локальной сети (LAN). Последний из используемых IP-адресов назначьте каналу WAN.
+
+в. Назначьте коммутаторам второй используемый IP-адрес в подключенных подсетях.
+
+г. Назначьте последние используемые IP-адреса компьютерам в каждой подсети.
+
+##### Часть 2. Назначение сетевым устройствам IP-адресов и проверка подключения
+Основная часть параметров IP-адресации для данной сети уже настроена. Для завершения настройки адресации выполните следующие шаги. Динамическая маршрутизация EIGRP уже настроена между R1 и R2.
+
+###### Шаг 1: Настройте интерфейсы VLAN.
+a. Настройте оба интерфейса LAN с адресами из таблицы адресации.
+
+б. Настройте интерфейсы таким образом, чтобы узлы локальных сетей имели подключение к шлюзу по умолчанию.
+
+<details>
+<summary><b>Процесс настройки</b></summary>
+
+R1> en
+R1# conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#interface G0/0
+R1(config-if)#ip address 192.168.100.1 255.255.255.224
+R1(config-if)#no shutdown
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+exit
+R1(config)#interface G0/1
+R1(config-if)#ip address 192.168.100.33 255.255.255.224
+R1(config-if)#no shutdown
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+exit
+R1(config)#exit
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+</details>
+
+###### Шаг 2: Настройте IP-адресацию на S3.
+a. Настройте интерфейс VLAN1 коммутатора с адресацией.
+
+б. Настройте адрес шлюза по умолчанию.
+
+<details>
+<summary><b>Процесс настройки</b></summary>
+
+```
+S3> en
+S3# conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+S3(config)#interface Vlan1
+S3(config-if)#ip address 192.168.100.66 255.255.255.224
+S3(config-if)#no shutdown
+
+S3(config-if)#
+%LINK-5-CHANGED: Interface Vlan1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to up
+
+S3(config-if)#exit
+S3(config)#ip default-gateway 192.168.100.65
+S3(config)#exit
+S3#
+%SYS-5-CONFIG_I: Configured from console by console
+```
+
+</details>
+
+###### Шаг 3: Настройка PC4.
+Настройте на PC4 адрес узла и шлюз по умолчанию.
+
+<details>
+<summary><b>Процесс настройки</b></summary>
+
+*Disktop* > *IP Configuration*
+
+![PC4 IP Configuration setup](./img/pc4-ip-configuration-setup.png)
+
+</details>
+
+###### Шаг 4: Проверьте подключение.
+Подключение можно проверить только между маршрутизатором R1, коммутатором S3 и компьютером PC4. При этом необходимо иметь возможность успешно отправить эхо-запрос на каждый IP-адрес, перечисленный в **таблице адресации**.
+
+
+<details>
+<summary><b>Процесс проверки</b></summary>
+
+Проверка всех подключений с **R1** (*CLI*):
+
+```
+R1>ping 192.168.100.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/4/8 ms
+
+R1>ping 192.168.100.33
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.33, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/3/7 ms
+
+R1>ping 192.168.100.129
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.129, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 2/3/9 ms
+
+R1>ping 192.168.100.65
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.65, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/5/10 ms
+
+R1>ping 192.168.100.97
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.97, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 5/8/10 ms
+
+R1>ping 192.168.100.158
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.158, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/7/12 ms
+
+R1>ping 192.168.100.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.2, timeout is 2 seconds:
+..!!!
+Success rate is 60 percent (3/5), round-trip min/avg/max = 0/1/3 ms
+
+R1>ping 192.168.100.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/0 ms
+
+R1>ping 192.168.100.34
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.34, timeout is 2 seconds:
+..!!!
+Success rate is 60 percent (3/5), round-trip min/avg/max = 0/0/2 ms
+
+R1>ping 192.168.100.34
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.34, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/1/3 ms
+
+R1>ping 192.168.100.66
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.66, timeout is 2 seconds:
+..!!!
+Success rate is 60 percent (3/5), round-trip min/avg/max = 1/5/7 ms
+
+R1>ping 192.168.100.66
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.66, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/5/9 ms
+
+R1>ping 192.168.100.98
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.98, timeout is 2 seconds:
+..!!!
+Success rate is 60 percent (3/5), round-trip min/avg/max = 1/4/11 ms
+
+R1>ping 192.168.100.98
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.98, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/3/6 ms
+
+R1>ping 192.168.100.30
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.30, timeout is 2 seconds:
+.!!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 0/1/2 ms
+
+R1>ping 192.168.100.30
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.30, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+R1>ping 192.168.100.62
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.62, timeout is 2 seconds:
+.!!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 0/0/1 ms
+
+R1>ping 192.168.100.62
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.62, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+R1>ping 192.168.100.94
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.94, timeout is 2 seconds:
+.!!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 1/2/7 ms
+
+R1>ping 192.168.100.94
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.94, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/2/9 ms
+
+R1>ping 192.168.100.126
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.126, timeout is 2 seconds:
+.!!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 1/2/6 ms
+
+R1>ping 192.168.100.126
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.126, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/6/14 ms
+
+R1>
+```
+
+Проверка всех подключений с **S3** (*CLI*):
+
+```
+S3>ping 192.168.100.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/8/14 ms
+
+S3>ping 192.168.100.33
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.33, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/7/12 ms
+
+S3>ping 192.168.100.129
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.129, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/9/13 ms
+
+S3>ping 192.168.100.65
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.65, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/1 ms
+
+S3>ping 192.168.100.97
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.97, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+S3>ping 192.168.100.158
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.158, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/2 ms
+
+S3>ping 192.168.100.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/4/8 ms
+
+S3>ping 192.168.100.34
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.34, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 2/9/14 ms
+
+S3>ping 192.168.100.66
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.66, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/2/7 ms
+
+S3>ping 192.168.100.98
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.98, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/3 ms
+
+S3>ping 192.168.100.30
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.30, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 2/7/12 ms
+
+S3>ping 192.168.100.62
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.62, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/6/12 ms
+
+S3>ping 192.168.100.94
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.94, timeout is 2 seconds:
+.!!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 0/1/2 ms
+
+S3>ping 192.168.100.94
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.94, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/0 ms
+
+S3>ping 192.168.100.126
+S3>ping 192.168.100.126
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.100.126, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/2/7 ms
+
+S3>
+```
+
+Проверка всех подключений с **PC4** (*Desktop* > *Command Prompt*):
+
+```
+Cisco Packet Tracer PC Command Line 1.0
+C:\>ping 192.168.100.1
+
+Pinging 192.168.100.1 with 32 bytes of data:
+
+Reply from 192.168.100.1: bytes=32 time=11ms TTL=254
+Reply from 192.168.100.1: bytes=32 time=10ms TTL=254
+Reply from 192.168.100.1: bytes=32 time=6ms TTL=254
+Reply from 192.168.100.1: bytes=32 time=10ms TTL=254
+
+Ping statistics for 192.168.100.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 6ms, Maximum = 11ms, Average = 9ms
+
+C:\>ping 192.168.100.33
+
+Pinging 192.168.100.33 with 32 bytes of data:
+
+Reply from 192.168.100.33: bytes=32 time=13ms TTL=254
+Reply from 192.168.100.33: bytes=32 time=1ms TTL=254
+Reply from 192.168.100.33: bytes=32 time=1ms TTL=254
+Reply from 192.168.100.33: bytes=32 time=1ms TTL=254
+
+Ping statistics for 192.168.100.33:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 13ms, Average = 4ms
+
+C:\>ping 192.168.100.129
+
+Pinging 192.168.100.129 with 32 bytes of data:
+
+Reply from 192.168.100.129: bytes=32 time=8ms TTL=254
+Reply from 192.168.100.129: bytes=32 time=6ms TTL=254
+Reply from 192.168.100.129: bytes=32 time=2ms TTL=254
+Reply from 192.168.100.129: bytes=32 time=2ms TTL=254
+
+Ping statistics for 192.168.100.129:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 2ms, Maximum = 8ms, Average = 4ms
+
+C:\>ping 192.168.100.65
+
+Pinging 192.168.100.65 with 32 bytes of data:
+
+Reply from 192.168.100.65: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.65: bytes=32 time=1ms TTL=255
+Reply from 192.168.100.65: bytes=32 time=3ms TTL=255
+Reply from 192.168.100.65: bytes=32 time=1ms TTL=255
+
+Ping statistics for 192.168.100.65:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 3ms, Average = 1ms
+
+C:\>ping 192.168.100.97
+
+Pinging 192.168.100.97 with 32 bytes of data:
+
+Reply from 192.168.100.97: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.97: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.97: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.97: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.100.97:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>ping 192.168.100.158
+
+Pinging 192.168.100.158 with 32 bytes of data:
+
+Reply from 192.168.100.158: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.158: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.158: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.158: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.100.158:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>ping 192.168.100.2
+
+Pinging 192.168.100.2 with 32 bytes of data:
+
+Reply from 192.168.100.2: bytes=32 time=7ms TTL=253
+Reply from 192.168.100.2: bytes=32 time=1ms TTL=253
+Reply from 192.168.100.2: bytes=32 time=1ms TTL=253
+Reply from 192.168.100.2: bytes=32 time=5ms TTL=253
+
+Ping statistics for 192.168.100.2:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 7ms, Average = 3ms
+
+C:\>ping 192.168.100.34
+
+Pinging 192.168.100.34 with 32 bytes of data:
+
+Reply from 192.168.100.34: bytes=32 time=8ms TTL=253
+Reply from 192.168.100.34: bytes=32 time=5ms TTL=253
+Reply from 192.168.100.34: bytes=32 time=11ms TTL=253
+Reply from 192.168.100.34: bytes=32 time=1ms TTL=253
+
+Ping statistics for 192.168.100.34:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 11ms, Average = 6ms
+
+C:\>ping 192.168.100.66
+
+Pinging 192.168.100.66 with 32 bytes of data:
+
+Reply from 192.168.100.66: bytes=32 time<1ms TTL=254
+Reply from 192.168.100.66: bytes=32 time=1ms TTL=254
+Reply from 192.168.100.66: bytes=32 time<1ms TTL=254
+Reply from 192.168.100.66: bytes=32 time=2ms TTL=254
+
+Ping statistics for 192.168.100.66:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 2ms, Average = 0ms
+
+C:\>ping 192.168.100.98
+
+Pinging 192.168.100.98 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.100.98: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.98: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.98: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.100.98:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>ping 192.168.100.98
+
+Pinging 192.168.100.98 with 32 bytes of data:
+
+Reply from 192.168.100.98: bytes=32 time<1ms TTL=255
+Reply from 192.168.100.98: bytes=32 time=1ms TTL=255
+Reply from 192.168.100.98: bytes=32 time=1ms TTL=255
+Reply from 192.168.100.98: bytes=32 time=1ms TTL=255
+
+Ping statistics for 192.168.100.98:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 1ms, Average = 0ms
+
+C:\>ping 192.168.100.30
+
+Pinging 192.168.100.30 with 32 bytes of data:
+
+Reply from 192.168.100.30: bytes=32 time=15ms TTL=126
+Reply from 192.168.100.30: bytes=32 time=11ms TTL=126
+Reply from 192.168.100.30: bytes=32 time=5ms TTL=126
+Reply from 192.168.100.30: bytes=32 time=7ms TTL=126
+
+Ping statistics for 192.168.100.30:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 5ms, Maximum = 15ms, Average = 9ms
+
+C:\>ping 192.168.100.62
+
+Pinging 192.168.100.62 with 32 bytes of data:
+
+Reply from 192.168.100.62: bytes=32 time=9ms TTL=126
+Reply from 192.168.100.62: bytes=32 time=11ms TTL=126
+Reply from 192.168.100.62: bytes=32 time=8ms TTL=126
+Reply from 192.168.100.62: bytes=32 time=8ms TTL=126
+
+Ping statistics for 192.168.100.62:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 8ms, Maximum = 11ms, Average = 9ms
+
+C:\>ping 192.168.100.94
+
+Pinging 192.168.100.94 with 32 bytes of data:
+
+Reply from 192.168.100.94: bytes=32 time<1ms TTL=127
+Reply from 192.168.100.94: bytes=32 time<1ms TTL=127
+Reply from 192.168.100.94: bytes=32 time<1ms TTL=127
+Reply from 192.168.100.94: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.100.94:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+C:\>ping 192.168.100.126
+
+Pinging 192.168.100.126 with 32 bytes of data:
+
+Reply from 192.168.100.126: bytes=32 time=5ms TTL=128
+Reply from 192.168.100.126: bytes=32 time=5ms TTL=128
+Reply from 192.168.100.126: bytes=32 time=3ms TTL=128
+Reply from 192.168.100.126: bytes=32 time=7ms TTL=128
+
+Ping statistics for 192.168.100.126:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 3ms, Maximum = 7ms, Average = 5ms
+
+C:\>
+```
+
+</details>
