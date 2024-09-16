@@ -1,3 +1,5 @@
+<link href="styles.css" rel="stylesheet" />
+
 # Компьютерные сети
 65c7a7fcd048d37352720f91
 
